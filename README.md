@@ -13,9 +13,6 @@ In order to run this project, complete the following steps:
 
 ## Performing simulations
 
-In order to start the simulation, we should firstly set the initial parameters in order to generate a different behaviour and output new outcomes. This can be done in the atributes' header in `Simulation.java`.
-
-![image](https://user-images.githubusercontent.com/92053176/198898145-44da11c9-dd0c-4bdd-94d8-77d8ee437c70.png)
 
 Running `java -cp out Simulation` will output a text log with results of simulation:
 
@@ -157,15 +154,19 @@ Balances after
 
 Everytime when running a new simulation either with same parameters, or with other ones, it will generate a new set of results which can be compared with batch of data. All entities, their addresses and initial balances are generated randomly, ensuring the diversity of outcomes.
 
-## Conclusions
+## Architectural paterns
 
-Several conclusions can be made after a small amount of research based on obtained results:
+This system is modeled based on MVC architecture and its entities are structured according to the separation of concerns.  
 
+![image](https://user-images.githubusercontent.com/92053176/204489306-40dce966-698c-494b-ab50-716275534297.png)
 
-1. System performance is highly affected by the difficulty of cryptographic puzzle (PoW) which is used for mining. This mathematical problem is solved by brute-forcing all possible hashes. Therefore, the system's latency can decrease exponentially if the difficulty is increased several times.
+The View is in charge of the presentation layer (GUI), and it can be anything related to UI, such as buttons, windows, tables, lists, canvas, or any abstraction related to the elements on the screen that the user can see and interact with. In this case, the View is stateless. It is simply rendered by the Controller once the Model is suffering some changes.
 
+The Controller is regarded as the glue or mediator between the Model and the View, and in general
+is responsible for altering the Model by reacting to user actions performed on the View and updating the
+View with Model changes. The user’s interactions call methods on the Controller which, as a result, updates
+the Model internal state.
 
-2. The more users interact with each other, the higher the probability that call requests for making transactions will overflow and will decrease the network latency.
-
-
-3. The larger size of blocks makes the process of mining more cumbersome. As a result, miners spend a lot of time and computing resources verifying transactions from the transaction pool, mining them, packaging all sorted transactions into blocks, and mining the resulted block — for sure negatively impacting the throghput and latency of the system.
+The Model is responsible for the domain data or a data access layer which manipulates the data
+and keeps the business logic. It exposes change listeners to notify observers that it has changed and View
+subscribes for changes emitted by the model to update itself.
