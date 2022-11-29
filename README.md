@@ -154,7 +154,7 @@ Balances after
 
 Everytime when running a new simulation either with same parameters, or with other ones, it will generate a new set of results which can be compared with batch of data. All entities, their addresses and initial balances are generated randomly, ensuring the diversity of outcomes.
 
-## Architectural paterns
+## Architectural patterns
 
 This system is modeled based on MVC architecture and its entities are structured according to the separation of concerns.  
 
